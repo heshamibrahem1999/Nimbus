@@ -1,0 +1,42 @@
+<div class="container-fluid bg-dark p-lg-5">
+    <div class="row">
+        <div id="left-side" class="col-lg-6 col-md-12 text-lg-start text-center p-lg-4">
+            <div id="buy">
+                <p id="buy-paragraph">Buy Now</p>
+            </div>
+            <div id="order" class="lh-1 text-lg-end">
+                <p id="order-paragraph">
+                    Place your order online now
+                </p>
+                <p id="order-second-paragraph">
+                    No minimum purchase
+                </p>
+            </div>
+            <div id="lorem">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut porro expedita sapiente consequatur obcaecati. Iste voluptatum nihil enim reprehenderit labore repellat, ratione id inventore. Accusantium at totam inventore quia veniam?
+            </div>
+            <div id="shipping">
+                SHIPPING TO ANYWHERE IN THE WORLD
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-0">
+            <div class="row" id="first-row">
+                <strong class="text-white text-center">Our Products:</strong>
+            </div>
+            <div class="row" id="second-row">
+                <div class="col" *ngFor="let item of FirstThreeProduct">
+                    <img class="w-100 h-50" [src]="item!.images[0]" alt="Product">
+                    <a routerLink="/Product/{{item!.id}}" routerLinkActive="active" ariaCurrentWhenActive="page"><h5 class="text-white text-center mt-2">{{item!.title}}</h5></a>
+                    <p class="text-white text-center">{{item!.price | currency }}</p>
+                </div>
+            </div>
+            <div class="row" id="third-row">
+                <div class="col" *ngFor="let item of SecondThreeProduct">
+                    <img class="w-100 h-50" [src]="item!.images[0]" alt="Product">
+                    <a routerLink="/Product/{{item!.id}}" routerLinkActive="active" ariaCurrentWhenActive="page"><h5 class="text-white text-center mt-2">{{item!.title}}</h5></a>
+                    <p class="text-white text-center">{{item!.price | currency}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

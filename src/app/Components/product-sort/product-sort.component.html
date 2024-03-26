@@ -1,0 +1,19 @@
+<div class="px-2 py-2" id="SortOverlay">
+    <label for="Sort" class="form-label">Sort by</label>
+    <select class="form-select form-select-lg" name="Sort" id="Sort" #SelectedSort>
+        <option value="1">Ascending Price</option>
+        <option value="2">Descending Price</option>
+        <option value="3">Ascending Stock</option>
+        <option value="4">Descending Stock</option>
+        <option value="5">Ascending A-Z</option>
+        <option value="6">Descending A-Z</option>
+        <option value="7">Ascending Rating</option>
+        <option value="8">Descending Rating</option>
+    </select>
+    <div class="d-grid gap-2">
+        <button type="button" name="SortButton" id="SortButton" class="btn btn-primary" (click)="addNewItem(SelectedSort.value)">
+            Sort
+        </button>
+    </div>
+
+</div>

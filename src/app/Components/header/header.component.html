@@ -1,0 +1,44 @@
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a routerLink="/Home" routerLinkActive="active" ariaCurrentWhenActive="page"
+                        class="nav-link px-2 text-white">Home</a></li>
+                <li><a routerLink="/Product" routerLinkActive="active" ariaCurrentWhenActive="page"
+                        class="nav-link px-2 text-white">Product</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form>
+
+            <div *ngIf="!User" class="text-end">
+                <a routerLink="/LogIn" routerLinkActive="active"><button type="button"
+                        class="btn btn-outline-light me-2">Login</button></a>
+                <a routerLink="/SignUp" routerLinkActive="active"><button type="button"
+                        class="btn btn-warning">Sign-up</button></a>
+            </div>
+            <div *ngIf="User" class="text-end">
+                <div mdbDropdown class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img [src]="User.image" alt="" class="rounded" width="40" height="32">
+                        Welcome {{User.firstName}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" routerLink="/Saved" routerLinkActive="active" ariaCurrentWhenActive="page">Saved items</a></li>
+                        <li><a class="dropdown-item" routerLink="/Cart" routerLinkActive="active" ariaCurrentWhenActive="page">Cart</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" (click)="Logout()" href="">Logout</a></li>
+                      </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>

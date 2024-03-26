@@ -1,0 +1,29 @@
+$PrimaryColor: #e49564; //Home page text color (mostly for headers)
+$SecondaryColor: white; //Home page text color (mostly for body)
+$FontRefrence: 80px; 
+
+#left-side{
+    height: 73.8vh;
+}
+
+#buy-paragraph{
+    color: $PrimaryColor;
+    font-size: $FontRefrence;
+    font-weight: 700; //bold
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#order{
+    color: $SecondaryColor;
+    font-size: calc($FontRefrence/2);
+}
+
+#lorem{
+    color: $SecondaryColor;
+    font-size: calc($FontRefrence/10);
+}
+
+#shipping{
+    color: $PrimaryColor;
+    font-size: calc($FontRefrence/2);
+}

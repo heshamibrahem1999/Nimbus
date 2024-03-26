@@ -1,0 +1,21 @@
+#SignUpScreen{
+    background-image: url(../../img/LoginBackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 5.5rem;
+    height: 100vw;
+}
+
+#main-window{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#button{
+    margin-left: 10rem;
+}
+
+.invalid-field {
+    border-color: red;
+  }

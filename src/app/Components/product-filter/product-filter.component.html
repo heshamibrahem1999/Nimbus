@@ -1,0 +1,7 @@
+<div class="px-2 py-2" id="FilterOverlay">
+    <label for="Category" class="form-label">Filter By Category</label>
+    <select class="form-select form-select-lg" name="Category" id="Category" #SelectedCategory (change)="addNewItem(SelectedCategory.value)">
+        <option selected value="All">All</option>
+        <option *ngFor="let item of Category" [value]="item">{{item}}</option>
+    </select>
+</div>

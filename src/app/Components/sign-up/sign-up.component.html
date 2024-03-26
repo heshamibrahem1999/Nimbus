@@ -1,0 +1,322 @@
+
+<div id="SignUpScreen" class="container-fluid">
+    <div></div>
+    <!-- Main Accordion Container -->
+    <div id="main-window" class="border accordion accordion-flush">
+
+        <!-- First Accordion Button -->
+        <div class="accordion-item">
+            <!-- Accordion Header -->
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Account Information <div *ngIf="accountInfoComplete">✔️</div>
+                    <!-- Checkmark appears if account info is complete -->
+                </button>
+            </h2>
+            <!-- Accordion Body -->
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#main-window">
+                <!-- Form for Account Information -->
+                <form [formGroup]="AccountInfo" class="p-5" (ngSubmit)="onSubmit()">
+                    <!-- Account Information Fields -->
+                    <!-- First Name -->
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="first-name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="first-name" id="first-name"
+                                placeholder="Your First name" formControlName="FirstName"
+                                [ngClass]="{'invalid-field': AccountInfo.get('FirstName')!.touched && AccountInfo.get('FirstName')!.invalid}" />
+                        </div>
+                        <!-- Maiden Name -->
+                        <div class="mb-3 col">
+                            <label for="maiden-name" class="form-label">Maiden Name</label>
+                            <input type="text" class="form-control" name="maiden-name" id="maiden-name"
+                                placeholder="Your Maiden name" formControlName="MaidenName"
+                                [ngClass]="{'invalid-field': AccountInfo.get('MaidenName')!.touched && AccountInfo.get('MaidenName')!.invalid}" />
+                        </div>
+                        <!-- Last Name -->
+                        <div class="mb-3 col">
+                            <label for="last-name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="last-name" id="last-name"
+                                placeholder="Your Last name" formControlName="LastName"
+                                [ngClass]="{'invalid-field': AccountInfo.get('LastName')!.touched && AccountInfo.get('LastName')!.invalid}" />
+                        </div>
+                    </div>
+                    <!-- Gender -->
+                    <div class="mb-3 col-4">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-select form-select-lg" name="gender" id="gender" formControlName="Gender"
+                            [ngClass]="{'invalid-field': AccountInfo.get('Gender')!.touched && AccountInfo.get('Gender')!.invalid}">
+                            <option value="male">male</option>
+                            <option value="female">female</option>
+                        </select>
+                    </div>
+                    <!-- Email and Confirm Email -->
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="abc@mail.com"
+                                formControlName="Email"
+                                [ngClass]="{'invalid-field': AccountInfo.get('Email')!.touched && AccountInfo.get('Email')!.invalid}" />
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="confirm-email" class="form-label">Confirm Email</label>
+                            <input type="email" class="form-control" name="confirm-email" id="confirm-email"
+                                placeholder="abc@mail.com" formControlName="ConfirmEmail"
+                                [ngClass]="{'invalid-field': AccountInfo.get('ConfirmEmail')!.touched && AccountInfo.get('ConfirmEmail')!.invalid}" />
+                        </div>
+                    </div>
+                    <!-- Country, Phone Number, and other fields -->
+                    <div class="row">
+                        <div class="mb-3 col-4">
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-select form-select-lg" name="country" id="country" formControlName="Country"
+                                (change)="GetCountryCodeAndUniversities(AccountInfo.value.Country!)"
+                                [ngClass]="{'invalid-field': AccountInfo.get('Country')!.touched && AccountInfo.get('Country')!.invalid}">
+                                <option *ngFor="let item of Countries" [value]="item">{{item}}</option>
+                            </select>
+                        </div>
+                        <!-- Display Country Codes -->
+                        <div class="mb-3 ps-5 col-1 pt-5 font-weight-bold">
+                            {{CountryCodes}}
+                        </div>
+                        <!-- Phone Number -->
+                        <div class="mb-3 col">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" name="phone" id="phone" placeholder="xxx-xxx-xxx"
+                                formControlName="Phone"
+                                [ngClass]="{'invalid-field': AccountInfo.get('Phone')!.touched && AccountInfo.get('Phone')!.invalid}" />
+                        </div>
+                    </div>
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Your UserName"
+                            formControlName="UserName"
+                            [ngClass]="{'invalid-field': AccountInfo.get('UserName')!.touched && AccountInfo.get('UserName')!.invalid}" />
+                    </div>
+                    <!-- Password and Confirm Password -->
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Your password" formControlName="Password"
+                                [ngClass]="{'invalid-field': AccountInfo.get('Password')!.touched && AccountInfo.get('Password')!.invalid}" />
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="rpassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="rpassword" id="rpassword"
+                                placeholder="Repeat Password" formControlName="ConfirmPassword"
+                                [ngClass]="{'invalid-field': AccountInfo.get('ConfirmPassword')!.touched && AccountInfo.get('ConfirmPassword')!.invalid}" />
+                        </div>
+                    </div>
+                    <!-- Birth Date -->
+                    <div class="mb-3 col-4">
+                        <label for="birth-date" class="form-label">Birth Date</label>
+                        <input type="date" class="form-control" name="birth-date" id="birth-date"
+                            formControlName="BirthDate"
+                            [ngClass]="{'invalid-field': AccountInfo.get('BirthDate')!.touched && AccountInfo.get('BirthDate')!.invalid}" />
+                    </div>
+                    <!-- Image -->
+                    <div class="mb-3 col-4">
+                        <label for="image" class="form-label">Choose Image</label>
+                        <input type="file" class="form-control" name="image" id="image"
+                            accept="image/png, image/gif, image/jpeg" formControlName="Image"
+                            [ngClass]="{'invalid-field': AccountInfo.get('Image')!.touched && AccountInfo.get('Image')!.invalid}" />
+                    </div>
+                    <!-- University -->
+                    <div class="mb-3 col-4">
+                        <label for="university" class="form-label">University</label>
+                        <select class="form-select form-select-lg" name="university" id="university"
+                            formControlName="University"
+                            [ngClass]="{'invalid-field': AccountInfo.get('University')!.touched && AccountInfo.get('University')!.invalid}">
+                            <option *ngFor="let item of Universities" [value]="item.name">{{item.name}}</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Second Accordion Button -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Physical Attribute <div *ngIf="phyAttributeComplete">✔️</div>
+                </button>
+            </h2>
+            <!-- body -->
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                data-bs-parent="#main-window">
+                <form [formGroup]="PhyAttribute" class="p-5" (ngSubmit)="onSubmit()">
+                    <div class="mb-3 col-4">
+                        <label for="blood-group" class="form-label">Blood group</label>
+                        <select class="form-select form-select-lg" name="blood-group" id="blood-group"
+                            formControlName="BloodGroup"
+                            [ngClass]="{'invalid-field': PhyAttribute.get('BloodGroup')!.touched && PhyAttribute.get('BloodGroup')!.invalid}">
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="height" class="form-label">Height</label>
+                            <input type="range" class="form-control" name="height" id="height" min="150" max="250"
+                                formControlName="Height"
+                                [ngClass]="{'invalid-field': PhyAttribute.get('Height')!.touched && PhyAttribute.get('Height')!.invalid}" />
+                            <small>{{PhyAttribute.value.Height}} cm</small>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="weight" class="form-label">Weight</label>
+                            <input type="range" class="form-control" name="weight" id="weight" min="20" max="250"
+                                formControlName="Weight"
+                                [ngClass]="{'invalid-field': PhyAttribute.get('Weight')!.touched && PhyAttribute.get('Weight')!.invalid}" />
+                            <small>{{PhyAttribute.value.Weight}} kg</small>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-1">
+                        <label for="eye-color" class="form-label">Eye color</label>
+                        <input type="color" class="form-control" name="eye-color" id="eye-color" formControlName="EyeColor"
+                            [ngClass]="{'invalid-field': PhyAttribute.get('EyeColor')!.touched && PhyAttribute.get('EyeColor')!.invalid}" />
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-2">
+                            <label for="hair-color" class="form-label">Hair color</label>
+                            <input type="color" class="form-control" name="hair-color" id="hair-color"
+                                formControlName="HairColor"
+                                [ngClass]="{'invalid-field': PhyAttribute.get('HairColor')!.touched && PhyAttribute.get('HairColor')!.invalid}" />
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="hair-type" class="form-label">Hair Type</label>
+                            <select class="form-select form-select-lg" name="hair-type" id="hair-type"
+                                formControlName="HairType"
+                                [ngClass]="{'invalid-field': PhyAttribute.get('HairType')!.touched && PhyAttribute.get('HairType')!.invalid}">
+                                <option value="Straight">Straight</option>
+                                <option value="Wavy">Wavy</option>
+                                <option value="Curly">Curly</option>
+                                <option value="Coily">Coily</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Third Accordion Button -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Address <div *ngIf="addressComplete">✔️</div>
+                </button>
+            </h2>
+            <!-- body -->
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                data-bs-parent="#main-window">
+                <form [formGroup]="Address" class="p-5" (ngSubmit)="onSubmit()">
+                    <div class="mb-3 col-4">
+                        <label for="domain" class="form-label">Domain (Optional)</label>
+                        <input type="text" class="form-control" name="domain" id="domain" placeholder="xxxxx.com"
+                            formControlName="Domain"
+                            [ngClass]="{'invalid-field': Address.get('Domain')!.touched && Address.get('Domain')!.invalid}" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="address" id="address" placeholder="52 Washinton st"
+                            formControlName="Address"
+                            [ngClass]="{'invalid-field': Address.get('Address')!.touched && Address.get('Address')!.invalid}" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" name="city" id="city" placeholder="New York"
+                            formControlName="City"
+                            [ngClass]="{'invalid-field': Address.get('City')!.touched && Address.get('City')!.invalid}" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="postal-code" class="form-label">Postal code</label>
+                        <input type="text" class="form-control" name="postal-code" id="postal-code" placeholder="005500"
+                            formControlName="PostalCode"
+                            [ngClass]="{'invalid-field': Address.get('PostalCode')!.touched && Address.get('PostalCode')!.invalid}" />
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" name="state" id="state" placeholder="NY"
+                            formControlName="State"
+                            [ngClass]="{'invalid-field': Address.get('State')!.touched && Address.get('State')!.invalid}" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- forth accordion button -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Bank Information <div *ngIf="bankComplete">✔️</div>
+                </button>
+            </h2>
+            <!-- body -->
+            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+                data-bs-parent="#main-window">
+                <form [formGroup]="Bank" class="p-5" (ngSubmit)="onSubmit()">
+                    <div class="form-group col-2">
+                        <label for="cardExpire">Card Expiry:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardExpireMonth" formControlName="CardExpireMonth"
+                                placeholder="MM"
+                                [ngClass]="{'invalid-field': Bank.get('CardExpireMonth')!.touched && Bank.get('CardExpireMonth')!.invalid}">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">/</span>
+                            </div>
+                            <input type="text" class="form-control" id="cardExpireYear" formControlName="CardExpireYear"
+                                placeholder="YY"
+                                [ngClass]="{'invalid-field': Bank.get('CardExpireYear')!.touched && Bank.get('CardExpireYear')!.invalid}">
+                        </div>
+                    </div>
+    
+                    <div class="form-group col-4">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" class="form-control" id="cardNumber" formControlName="CardNumber"
+                            (input)="formatCardNumber($event)"
+                            [ngClass]="{'invalid-field': Bank.get('CardNumber')!.touched && Bank.get('CardNumber')!.invalid}">
+                    </div>
+    
+                    <div class="form-group col-4">
+                        <label for="cardType">Card Type:</label>
+                        <select class="form-control" id="cardType" formControlName="CardType"
+                            [ngClass]="{'invalid-field': Bank.get('CardType')!.touched && Bank.get('CardType')!.invalid}">
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="americanexpress">American Express</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group col-4">
+                        <label for="currency">Currency:</label>
+                        <select class="form-control" id="currency" formControlName="Currency"
+                            [ngClass]="{'invalid-field': Bank.get('Currency')!.touched && Bank.get('Currency')!.invalid}">
+                            <option *ngFor="let currency of currencies" [value]="currency.code">{{ currency.name }} ({{
+                                currency.code }})</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group col-4">
+                        <label for="iban">IBAN:</label>
+                        <input type="text" class="form-control" id="iban" formControlName="Iban"
+                            [ngClass]="{'invalid-field': Bank.get('Iban')!.touched && Bank.get('Iban')!.invalid}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Submit Button -->
+    <div id="button">
+        <button type="button" class="btn btn-primary mt-5" (click)="onSubmit()">Submit</button>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div id="LoginScreen">
+    <div id="LoginSection" class="ps-5 pt-5">
+        <label for="email" class="SpacingMedium">Email: </label>
+        <br>
+        <input class="SpacingLarge" id="email" type="email" [formControl]="Login" #email>
+        <br>
+        <label class="SpacingMedium" for="password">password: </label>
+        <br>
+        <input class="SpacingLarge" id="password" type="password" [formControl]="Login" #password>
+        <br>
+        <a class="SpacingSmall" name="login" id="login" class="btn btn-primary" role="button"
+            (click)="LoginClicked(email.value,password.value)">Login</a>
+        <br>
+        <a class="alert-link">Forget your password?</a>
+    </div>
+</div>

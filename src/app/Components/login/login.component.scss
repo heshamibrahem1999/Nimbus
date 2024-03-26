@@ -1,0 +1,21 @@
+#LoginScreen{
+    background-image: url(../../img/LoginBackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 128px 40vw;
+}
+#LoginSection{
+    background-color: white;
+    border: 2px solid black;
+    width: 20vw;
+    height: 60vh;
+}
+.SpacingLarge{
+    margin-bottom: 15px;
+}
+.SpacingMedium{
+    margin-bottom: 10px;
+}
+.SpacingSmall{
+    margin-bottom: 5px;
+}

@@ -1,0 +1,40 @@
+<div *ngIf="CartItems.length > 0; else emptyCart">
+  <h2 class="mt-3 text-center">Your Cart</h2>
+  <div class="row">
+    <div class="col-4 text-center mt-2" *ngFor="let item of CartItems; index as i">
+      <img [src]="item.CartDetails.images[0]" alt="" width="190" height="200">
+      <div>{{ item.CartDetails.title }}</div>
+      <div>Price: {{ (item.CartDetails.price-(item.CartDetails.price*item.CartDetails.discountPercentage/100)) |
+        currency }}</div>
+      <div>Number: {{ item.CartCount.Count }} <button (click)="Increase(i)" (click)="UpdateTotal()" type="button"
+          class="btn btn-primary">
+          +
+        </button><button (click)="Decrease(i)" (click)="UpdateTotal()" type="button" class="btn btn-primary">
+          -
+        </button>
+      </div>
+      <div>Total Price:
+        {{((item.CartDetails.price-(item.CartDetails.price*item.CartDetails.discountPercentage/100))*item.CartCount.Count)
+        | currency }}</div>
+      <div class="form-check form-check-inline">
+        <input (change)="UpdateTotal()" [(ngModel)]="TotalItemToBuy[i].IsChecked" class="form-check-input"
+          type="checkbox" id="number-{{i}}" [value]="i" />
+        <label class="form-check-label" for="number-{{i}}">Select to buy</label>
+      </div>
+    </div>
+    <hr>
+    <div>
+      Total Price: {{TotalPrice|currency}}
+    </div>
+    <div class="d-grid gap-2">
+      <button (click)="Buy()" [disabled]="TotalPrice==0" type="button" name="" id="" class="btn btn-primary">
+        Buy
+      </button>
+    </div>
+
+  </div>
+
+</div>
+<ng-template #emptyCart>
+  <p>Your cart is empty</p>
+</ng-template>

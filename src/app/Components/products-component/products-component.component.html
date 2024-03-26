@@ -1,0 +1,59 @@
+<div id="Container">
+    <div class="container-fluid bg-dark text-white">
+        <h2 class="text-center py-5">Our Product</h2>
+        <div class="table-responsive">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="d-grid gap-2">
+                                <button type="button" name="filter" id="filter" class="btn btn-primary" (click)="FilterDisplay()">
+                                    Filter
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col" colspan="5">
+                            <div class="d-grid gap-2">
+                                <button type="button" name="sort" id="sort" class="btn btn-primary" (click)="SortDisplay()">
+                                    Sort By
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr class=" text-center">
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of ViewedProduct" class="text-dark text-center">
+                        <td scope="row">{{item.title}}</td>
+                        <td>{{item.category}}</td>
+                        <td>{{item.stock}}</td>
+                        <td>
+                            <del *ngIf="item.discountPercentage>0">{{item.price | currency}}</del>
+                            <p *ngIf="item.discountPercentage==0">{{item.price | currency}}</p>
+                            <p *ngIf="item.discountPercentage>0">{{item.price-(item.price*item.discountPercentage/100) | currency}}</p>
+                            <p *ngIf="item.discountPercentage>0" class="text-danger">{{item.discountPercentage}}% discount</p>
+                        </td>
+                        <td>{{item.rating}}</td>
+                        <td>
+                            <div class="d-grid gap-2">
+                                <button type="button" name="details" id="details" class="btn btn-primary" (click)="ProductDetails(item.id)">
+                                    Details
+                                </button>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-product-filter *ngIf="Hide==0" (newItemEvent)="ChangeCategory($event)"></app-product-filter>
+    <app-product-sort *ngIf="SortHide==0" (SortOutput)="SortItems($event)"></app-product-sort>
+</div>
